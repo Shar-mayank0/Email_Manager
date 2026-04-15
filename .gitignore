@@ -1,0 +1,210 @@
+# =============================================================================
+# EMAIL INTELLIGENCE BOT — .gitignore
+# =============================================================================
+
+# =============================================================================
+# SECRETS & CREDENTIALS — NEVER COMMIT THESE
+# =============================================================================
+.env
+credentials.json
+token.json
+*.pem
+*.key
+*.p12
+*.pfx
+service_account*.json
+oauth_*.json
+gcp_*.json
+
+
+# =============================================================================
+# UV PACKAGE MANAGER
+# =============================================================================
+.uv/
+
+
+# =============================================================================
+# PYTHON VIRTUAL ENVIRONMENT
+# =============================================================================
+.venv/
+venv/
+env/
+ENV/
+
+
+# =============================================================================
+# PYTHON CACHE & COMPILED FILES
+# =============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+
+
+# =============================================================================
+# DATABASE FILES
+# =============================================================================
+*.db
+*.sqlite
+*.sqlite3
+email_bot.db
+
+
+# =============================================================================
+# TESTING & COVERAGE
+# =============================================================================
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+nosetests.xml
+*.cover
+*.log
+
+
+# =============================================================================
+# ALEMBIC
+# =============================================================================
+# Keep the migrations/ folder and its files — they belong in git
+# Only ignore auto-generated temp files
+alembic/versions/__pycache__/
+
+
+# =============================================================================
+# FASTAPI / UVICORN
+# =============================================================================
+*.pid
+
+
+# =============================================================================
+# CELERY
+# =============================================================================
+celerybeat-schedule
+celerybeat.pid
+celery-worker.log
+
+
+# =============================================================================
+# LOGS
+# =============================================================================
+*.log
+logs/
+log/
+
+
+# =============================================================================
+# DOCKER
+# =============================================================================
+# Keep Dockerfiles and docker-compose.yml — they belong in git
+# Only ignore runtime artifacts
+docker/volumes/
+docker/data/
+
+
+# =============================================================================
+# FRONTEND (Next.js / Node)
+# =============================================================================
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/.pnp/
+frontend/.pnp.js
+frontend/.vercel
+
+
+# =============================================================================
+# EDITORS & IDEs
+# =============================================================================
+
+# VS Code
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json.example
+
+# JetBrains (PyCharm, WebStorm)
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Vim / Neovim
+*.swp
+*.swo
+*~
+.netrwhist
+
+# Emacs
+*~
+\#*\#
+.#*
+
+
+# =============================================================================
+# OPERATING SYSTEM
+# =============================================================================
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS (in case you ever switch)
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+.directory
+
+
+# =============================================================================
+# LLM / AI ARTIFACTS
+# =============================================================================
+# Local Ollama model downloads (large binary files)
+*.gguf
+*.ggml
+models/
+ollama_models/
+
+
+# =============================================================================
+# SAMPLE DATA & EXPORTS (keep fixtures, ignore real data)
+# =============================================================================
+# Real email exports should never be committed
+exports/
+data/raw/
+data/emails/
+*.mbox
+*.eml
+
+# Keep the sample_emails fixtures folder (mock data for testing)
+!backend/tests/fixtures/sample_emails/
+
+
+# =============================================================================
+# MISCELLANEOUS
+# =============================================================================
+*.bak
+*.tmp
+*.temp
+.cache/
+dist/
+build/
+*.egg-info/
+.eggs/
