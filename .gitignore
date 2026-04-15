@@ -192,6 +192,7 @@ data/raw/
 data/emails/
 *.mbox
 *.eml
+sync_state.json
 
 # Keep the sample_emails fixtures folder (mock data for testing)
 !backend/tests/fixtures/sample_emails/
