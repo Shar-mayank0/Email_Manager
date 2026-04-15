@@ -9,6 +9,10 @@ from backend.core.ingestion.sync_manager import fetch_new_emails
 def main() -> None:
     service = get_gmail_service()
     emails = fetch_new_emails(service)
+    for email in emails:
+        print("PLAIN:", email['body_plain'][:200])
+        print("DATE TYPE:", type(email['received_at']), email['received_at'])
+        print("---")
     
 
 

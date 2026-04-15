@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import base64
-from email.utils import parseaddr
+from email.utils import parseaddr, parsedate_to_datetime
 from pathlib import Path
 from typing import Any
 
@@ -10,6 +10,7 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
+from backend.core.preprocessing.html_cleaner import html_to_plain_text
 from backend.config.settings import settings
 
 SCOPES = [
@@ -79,7 +80,11 @@ def parse_email(raw_email: dict[str, Any]) -> dict[str, Any]:
 	sender_raw = header_map.get("from", "")
 	sender_name, sender_email = _parse_sender(sender_raw)
 	sender_domain = sender_email.split("@", 1)[1].lower() if "@" in sender_email else ""
+	received_at_raw = header_map.get("date", "")
+	received_at = _parse_received_at(received_at_raw)
 	body_plain, body_html = extract_body(payload)
+	if not body_plain and body_html:
+		body_plain = html_to_plain_text(body_html)
 
 	return {
 		"email_id": raw_email.get("id", ""),
@@ -89,7 +94,7 @@ def parse_email(raw_email: dict[str, Any]) -> dict[str, Any]:
 		"sender_name": sender_name,
 		"sender_email": sender_email,
 		"sender_domain": sender_domain,
-		"received_at": header_map.get("date", ""),
+		"received_at": received_at,
 		"labels": raw_email.get("labelIds", []),
 		"snippet": raw_email.get("snippet", ""),
 		"has_attachment": _has_attachment(payload),
@@ -139,6 +144,17 @@ def _parse_sender(sender_raw: str) -> tuple[str, str]:
 	"""Split RFC-822 From header into sender name and sender email address."""
 	sender_name, sender_email = parseaddr(sender_raw)
 	return sender_name.strip(), sender_email.strip().lower()
+
+
+def _parse_received_at(received_at_raw: str) -> Any:
+	"""Parse RFC 2822 Date header value into a timezone-aware datetime when possible."""
+	if not received_at_raw:
+		return None
+
+	try:
+		return parsedate_to_datetime(received_at_raw)
+	except (TypeError, ValueError):
+		return None
 
 
 def _has_attachment(part: dict[str, Any]) -> bool:
