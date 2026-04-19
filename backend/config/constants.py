@@ -1,0 +1,52 @@
+from enum import Enum
+
+from backend.config.settings import settings
+
+
+class Category(str, Enum):
+	IMPORTANT = "IMPORTANT"
+	BANKING = "BANKING"
+	INTERNSHIP = "INTERNSHIP"
+	PROMOTIONAL = "PROMOTIONAL"
+	TRASH = "TRASH"
+	UNCLASSIFIED = "UNCLASSIFIED"
+
+
+CATEGORY_IMPORTANT = Category.IMPORTANT.value
+CATEGORY_BANKING = Category.BANKING.value
+CATEGORY_INTERNSHIP = Category.INTERNSHIP.value
+CATEGORY_PROMOTIONAL = Category.PROMOTIONAL.value
+CATEGORY_TRASH = Category.TRASH.value
+CATEGORY_UNCLASSIFIED = Category.UNCLASSIFIED.value
+
+
+CONFIDENCE_AUTO_ACT_DEFAULT = 0.85
+CONFIDENCE_HUMAN_REVIEW_DEFAULT = 0.60
+
+# Use values from settings when available, while keeping in-code defaults.
+CONFIDENCE_AUTO_ACT = float(getattr(settings, "confidence_auto_act", CONFIDENCE_AUTO_ACT_DEFAULT))
+CONFIDENCE_HUMAN_REVIEW = float(
+	getattr(settings, "confidence_human_review", CONFIDENCE_HUMAN_REVIEW_DEFAULT)
+)
+
+
+SOURCE_RULE = "rule"
+SOURCE_LLM = "llm"
+SOURCE_MANUAL = "manual"
+
+
+STATUS_PENDING = "pending"
+STATUS_PENDING_REVIEW = "pending_review"
+STATUS_APPROVED = "approved"
+STATUS_ACTIONED = "actioned"
+
+
+ALL_CATEGORIES = (
+	CATEGORY_IMPORTANT,
+	CATEGORY_BANKING,
+	CATEGORY_INTERNSHIP,
+	CATEGORY_PROMOTIONAL,
+	CATEGORY_TRASH,
+	CATEGORY_UNCLASSIFIED,
+)
+

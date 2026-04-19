@@ -11,12 +11,12 @@ class Settings(BaseSettings):
     database_url: str
     app_env: str = "development"
     log_level: str = "INFO"
-    confidence_auto_act: float = 0.7
-    confidence_human_review: float = 0.4
+    confidence_auto_act: float = 0.85
+    confidence_human_review: float = 0.60
     llm_api_key: str
     llm_provider: str
     llm_model: str
-    llm_temperature: float = 0.7
+    llm_temperature: float 
 
 
 def _load_settings() -> Settings:
