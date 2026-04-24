@@ -13,7 +13,9 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
     confidence_auto_act: float = 0.85
     confidence_human_review: float = 0.60
-    llm_api_key: str
+    llm_model_path: str = "models/qwen2.5-1.5b-instruct"
+
+    # llm_api_key: str
     llm_provider: str
     llm_model: str
     llm_temperature: float 

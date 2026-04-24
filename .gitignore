@@ -209,3 +209,6 @@ dist/
 build/
 *.egg-info/
 .eggs/
+
+# Local models
+models/
